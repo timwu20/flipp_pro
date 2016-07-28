@@ -1,0 +1,17 @@
+header {
+  margin-top: 0rem;
+  margin-bottom: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; }
+  header .ui.menu {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0; }
+    header .ui.menu > a.item:first-child {
+      font-weight: bold; }
+      header .ui.menu > a.item:first-child img {
+        margin-right: 0.2rem; }
+
+.ui.main.container {
+  margin-top: 5rem; }

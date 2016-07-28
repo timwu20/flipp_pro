@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from django.conf import global_settings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -58,6 +59,7 @@ AUTHENTICATION_BACKENDS = [
 
 CAS_SERVER_URL = 'https://sso-staging.wishabi.com'
 CAS_REDIRECT_URL = 'http://localhost:8000/?dunno'
+
 ROOT_URLCONF = 'pro.urls'
 
 TEMPLATES = [
@@ -71,6 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.static',
             ],
         },
     },
