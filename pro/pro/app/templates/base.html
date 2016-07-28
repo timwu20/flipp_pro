@@ -18,6 +18,8 @@
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="{% static "semantic/dist/semantic.css" %}">
+  <link rel="stylesheet" href="{% static "dist/css/styles.css" %}">
+
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -25,10 +27,24 @@
 
 </head>
 <body>
+  <header class="ui container">
+    <div class="ui menu">
+      <a class="item">
+        <img style="margin-right: 0.25rem;" src="{% static 'images/flipp-logo.png' %}">PRO
+      </a>
+      <!--
+      <a class="item">Features</a>
+      <a class="item">Testimonials</a>
+      -->
+      <div class="right menu">
+        <a href="#" class="item">Logout</a>
+      </div>
+    </div>
+  </header>
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
+  <div class="ui main container">
     {% block content %}
     {% endblock %}
   </div>

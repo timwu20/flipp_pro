@@ -1,0 +1,10 @@
+header{
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+
+  .ui.menu{
+    & > a.item:first-child{
+      font-weight: bold;
+    }
+  }
+}
