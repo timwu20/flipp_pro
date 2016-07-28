@@ -1,0 +1,59 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Flipp Pro</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="{% static "semantic/dist/semantic.css" %}">
+  <link rel="stylesheet" href="{% static "dist/css/styles.css" %}">
+
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.png">
+
+</head>
+<body>
+  <header>
+    <div class="ui container">
+      <div class="ui menu">
+        <a class="item">
+          <img src="{% static 'images/flipp-logo.png' %}">PRO
+        </a>
+        <!--
+        <a class="item">Features</a>
+        <a class="item">Testimonials</a>
+        -->
+        <div class="right menu">
+          <a href="#" class="item">Logout</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="ui main container">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+
+  <script src="{% static "semantic/dist/semantic.min.js" %}"
+</html>

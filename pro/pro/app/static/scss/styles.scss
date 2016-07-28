@@ -1,0 +1,24 @@
+header{
+  margin-top: 0rem;
+  margin-bottom: 2rem;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  .ui.menu{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    & > a.item:first-child{
+      font-weight: bold;
+      img{
+        margin-right: 0.2rem;
+      }
+    }
+  }
+}
+.ui.main.container{
+  margin-top: 5rem;
+}
