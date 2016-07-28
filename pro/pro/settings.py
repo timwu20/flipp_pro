@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pro.app',
+    'django_cas_ng',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -51,6 +51,13 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'django_cas_ng.backends.CASBackend',
+]
+
+CAS_SERVER_URL = 'https://sso-staging.wishabi.com'
+CAS_REDIRECT_URL = 'http://localhost:8000/?dunno'
 ROOT_URLCONF = 'pro.urls'
 
 TEMPLATES = [

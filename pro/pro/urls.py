@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+import django_cas_ng
 
 urlpatterns = [
     url(r'^', include('pro.app.urls')),
     url(r'^admin/', admin.site.urls),
+
 ]
