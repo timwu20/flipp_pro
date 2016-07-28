@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Employee(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	coach = models.ForeignKey('Coach', on_delete=models.CASCADE, related_name="employees")
+	coach = models.ForeignKey('Coach', null=True, on_delete=models.CASCADE, related_name="employees")
 
 	position = models.CharField(max_length=100)
 	department = models.CharField(max_length=100)
