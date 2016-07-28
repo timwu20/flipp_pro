@@ -13,8 +13,8 @@ class Coach(Employee):
 
 	employee_ptr = models.OneToOneField('Employee', related_name="%(app_label)s_%(class)s_related")
 
-	def get_num_coachees():
-		return self.employee_set.count()
+	def get_num_employees():
+		return self.employees.count()
 
 
 		
