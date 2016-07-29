@@ -27,12 +27,12 @@ class Approver(Employee):
 class ApproverCoach(models.Model):
 	approver = models.ForeignKey(Approver, on_delete=models.CASCADE)
 	coach = models.ForeignKey('Coach', on_delete=models.CASCADE)
-	sequence_order = models.IntegerField(default=0)
 
 	def next_sequence_order(self):
 		#not incrementing cause we can use 0 index
 		return ApproverCoach.objects.filter(approver=self.approver, coach=self.coach).count()
 
+	sequence_order = models.IntegerField(default=next_sequence_order)
 
 class Coach(Employee):
 	approvers = models.ManyToManyField(Approver, through=ApproverCoach, related_name='coaches')
