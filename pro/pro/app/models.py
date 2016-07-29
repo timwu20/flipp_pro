@@ -4,14 +4,14 @@ from django.db.models import signals
 
 class Employee(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	coach = models.ForeignKey('Coach', null=True, on_delete=models.CASCADE, related_name="employees")
+	coach_obj = models.ForeignKey('Coach', blank=True, null=True, on_delete=models.CASCADE)
 
-	position = models.CharField(max_length=100)
-	department = models.CharField(max_length=100)
-	phone_number = models.CharField(max_length=10)
+	position = models.CharField(max_length=100, blank=True, null=True)
+	department = models.CharField(max_length=100, blank=True, null=True)
+	phone_number = models.CharField(max_length=10, blank=True, null=True)
 
 	def __str__(self):
-		return '%s' % self.user
+		return '%s %s' % (self.user.first_name, self.user.last_name)
 
 def create_employee(sender, instance, created, **kwargs):
     Employee.objects.get_or_create(user=instance)
@@ -19,10 +19,8 @@ def create_employee(sender, instance, created, **kwargs):
 signals.post_save.connect(create_employee, sender=User, weak=False, dispatch_uid='create_employee')
 
 class Approver(Employee):
-	employee = models.OneToOneField(Employee, related_name="%(app_label)s_%(class)s_related")
-
 	def __str__(self):
-		return self.employee
+		return self.employee_ptr.__str__()
 
 class ApproverCoach(models.Model):
 	approver = models.ForeignKey(Approver, on_delete=models.CASCADE)
@@ -36,21 +34,20 @@ class ApproverCoach(models.Model):
 
 class Coach(Employee):
 	approvers = models.ManyToManyField(Approver, through=ApproverCoach, related_name='coaches')
-	employee = models.OneToOneField(Employee, related_name="%(app_label)s_%(class)s_related")
+	#employee_ptr = models.OneToOneField('Employee', parent_link=True, related_name="%(app_label)s_%(class)s_related")
 
 	def get_num_employees():
 		return self.employees.count()
 
 	def __str__(self):
-		return self.employee.user
+		return self.employee_ptr.__str__()
 
 	class Meta:
 		verbose_name_plural = 'coaches'
 
 class BaseForm(models.Model):
-	case = models.ForeignKey('Case')
 	submitted = models.BooleanField(default=False)
-	submitted_date = models.DateTimeField(null=True, default=None)
+	submitted_date = models.DateTimeField(blank=True, null=True, default=None)
 
 	class Meta:
 		abstract = True

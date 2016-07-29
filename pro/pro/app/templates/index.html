@@ -1,5 +1,49 @@
 {% extends 'base.html' %}
 
 {% block content %}
-Flipp Performance Tracking Optimizer 3000
+<div class="ui vertical segment">
+  <h1 class="ui header">Welcome {{ user.first_name }}! {% if employee.coach %}<div class="ui blue horizontal label">Coach</div>{% endif %}</h1>
+
+  {% if employee.coach %}
+  <a href="#" class="ui button">Start a Case</a>
+  <a href="#" class="ui button">Add Team Member</a>
+  {% endif %}
+
+</div>
+
+<div class="ui vertical segment">
+  <h2 class="ui header">Open Cases</h4>
+
+  <div class="ui link cards">
+  {% for case in open_cases %}
+  <div class="ui card">
+    <div class="image">
+      {% if case.employee.user.first_name == 'Vinit' %}
+      <img src="https://s3.amazonaws.com/f.wishabi.ca/creative/internal-directory/vinit.png">
+      {% endif %}
+      {% if case.employee.user.first_name == 'Leon' %}
+      <img src="https://s3.amazonaws.com/f.wishabi.ca/creative/internal-directory/leon.png">
+      {% endif %}
+      {% if case.employee.user.first_name == 'Susan' %}
+      <img src="https://s3.amazonaws.com/f.wishabi.ca/creative/internal-directory/susan.png">
+      {% endif %}
+    </div>
+    <div class="content">
+      <a class="header">{{ case.employee }}</a>
+      <div class="meta">
+        <span class="date">Associate QA Analyst</span>
+      </div>
+    </div>
+    <div class="extra content">
+      <a href="#">Write Performance Review</a></br>
+      <a href="#">View Self Evaluation</a></br>
+      <a href="#">View 360 Feedback</a></br>
+
+      <button class="ui fluid button disabled">Submit for approval</button>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+</div>
+
 {% endblock %}
