@@ -4,14 +4,14 @@ from django.db.models import signals
 
 class Employee(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	coach_obj = models.ForeignKey('Coach', blank=True, null=True, on_delete=models.CASCADE)
+	boss = models.ForeignKey('Coach', blank=True, null=True, on_delete=models.CASCADE)
 
 	position = models.CharField(max_length=100, blank=True, null=True)
 	department = models.CharField(max_length=100, blank=True, null=True)
 	phone_number = models.CharField(max_length=10, blank=True, null=True)
 
-	def __str__(self):
-		return '%s %s' % (self.user.first_name, self.user.last_name)
+	#def __str__(self):
+	#	return '%s %s' % (self.user.first_name, self.user.last_name)
 
 def create_employee(sender, instance, created, **kwargs):
     Employee.objects.get_or_create(user=instance)
@@ -19,8 +19,9 @@ def create_employee(sender, instance, created, **kwargs):
 signals.post_save.connect(create_employee, sender=User, weak=False, dispatch_uid='create_employee')
 
 class Approver(Employee):
-	def __str__(self):
-		return self.employee_ptr.__str__()
+	pass
+	#def __str__(self):
+	#	return self.employee_ptr.__str__()
 
 class ApproverCoach(models.Model):
 	approver = models.ForeignKey(Approver, on_delete=models.CASCADE)
@@ -39,12 +40,20 @@ class Coach(Employee):
 	def get_num_employees():
 		return self.employees.count()
 
-	def __str__(self):
-		return self.employee_ptr.__str__()
+	#def __str__(self):
+		#	return self.employee_ptr.__str__()
 
 	class Meta:
 		verbose_name_plural = 'coaches'
 
+# So you can unmake an employee a coach
+class DelCoach(models.Model):
+	employee_ptr = models.PositiveIntegerField(db_column="employee_ptr_id", primary_key=True)
+	class Meta:
+		app_label = Coach._meta.app_label
+		db_table = Coach._meta.db_table
+		managed = False
+	
 class BaseForm(models.Model):
 	submitted = models.BooleanField(default=False)
 	submitted_date = models.DateTimeField(blank=True, null=True, default=None)
