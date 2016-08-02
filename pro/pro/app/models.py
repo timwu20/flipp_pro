@@ -13,6 +13,12 @@ class Employee(models.Model):
 	def __str__(self):
 		return '%s %s' % (self.user.first_name, self.user.last_name)
 
+	def create_coach(self):
+		c = Coach(employee_ptr_id = self.pk)
+		c.__dict__.update(self.__dict__)
+		c.save()
+		return c
+
 def create_employee(sender, instance, created, **kwargs):
     Employee.objects.get_or_create(user=instance)
 
