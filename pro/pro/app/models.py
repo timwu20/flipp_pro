@@ -38,7 +38,7 @@ class Coach(Employee):
 	#employee_ptr = models.OneToOneField('Employee', parent_link=True, related_name="%(app_label)s_%(class)s_related")
 
 	def get_num_employees():
-		return self.employees.count()
+		return self.employee_set.count()
 
 	#def __str__(self):
 		#	return self.employee_ptr.__str__()
