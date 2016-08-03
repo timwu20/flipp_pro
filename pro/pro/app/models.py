@@ -34,9 +34,13 @@ class ApproverCoach(models.Model):
 
 	def next_sequence_order(self):
 		#not incrementing cause we can use 0 index
-		return ApproverCoach.objects.filter(approver=self.approver, coach=self.coach).count()
+		return ApproverCoach.objects.filter(coach=self.coach).count()
 
 	sequence_order = models.IntegerField(default=next_sequence_order)
+
+	#add default ordering to this model
+	#class Meta:
+	#	ordering = ['sequence_order']
 
 class Coach(Employee):
 	approvers = models.ManyToManyField(Approver, through=ApproverCoach, related_name='coaches')
@@ -55,6 +59,7 @@ class BaseForm(models.Model):
 	submitted = models.BooleanField(default=False)
 	submitted_date = models.DateTimeField(blank=True, null=True, default=None)
 
+	#add created
 	class Meta:
 		abstract = True
 
@@ -68,6 +73,7 @@ class Feedback360(BaseForm):
 	provider = models.ForeignKey(Employee)
 
 class CaseStatus(models.Model):
+	#look into django fixtures, in progress, submitted, rejected
 	status = models.CharField(max_length=100, blank=False, null=False)
 
 class Case(models.Model):
