@@ -6,7 +6,8 @@
 
   {% if employee.coach %}
   <a href="#" class="ui button">Start a Case</a>
-  <a href="#" class="ui button">Add Team Member</a>
+  <a href="{% url 'app:show' employee.user_id "add" %}" class="ui button">Add Team Member</a>
+  <a href="{% url 'app:show' employee.user_id "remove" %}" class="ui button">Remove Team Member</a>
   {% endif %}
 
 </div>

@@ -19,6 +19,12 @@ class Employee(models.Model):
 		c.save()
 		return c
 
+	# Simply doing .delete() deletes the employee as well
+	def delete_coach(self):
+		coach_ptr = DelCoach.objects.get(pk=self.pk)
+		coach_ptr.delete()
+		return self
+
 def create_employee(sender, instance, created, **kwargs):
     Employee.objects.get_or_create(user=instance)
 
